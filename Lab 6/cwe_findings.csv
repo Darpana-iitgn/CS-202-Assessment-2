@@ -6,12 +6,12 @@ ArchiveBox,Semgrep,CWE-939,2,No
 ArchiveBox,Semgrep,CWE-78,2,Yes
 ArchiveBox,Semgrep,CWE-611,2,No
 ArchiveBox,Semgrep,CWE-776,1,No
-ArchiveBox,Pylint,CWE-UNKNOWN,1,No
 ApScheduler,Semgrep,CWE-502,2,Yes
-ApScheduler,Pylint,CWE-UNKNOWN,220,No
+ApScheduler,Pylint,CWE-732,16,No
 ApScheduler,Pylint,CWE-829,149,No
-ApScheduler,Pylint,CWE-563,2,No
-ApScheduler,Pylint,CWE-843,20,No
+ApScheduler,Pylint,CWE-563,27,No
+ApScheduler,Pylint,CWE-843,32,No
+ApScheduler,Pylint,CWE-664,3,No
 Requests,Semgrep,CWE-79,13,Yes
 Requests,Semgrep,CWE-95,1,No
 Requests,Semgrep,CWE-327,3,No
@@ -19,4 +19,3 @@ Requests,Bandit,CWE-94,1,Yes
 Requests,Bandit,CWE-327,3,No
 Requests,Bandit,CWE-400,116,Yes
 Requests,Bandit,CWE-502,7,Yes
-Requests,Pylint,CWE-UNKNOWN,1,No

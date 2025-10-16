@@ -339,6 +339,18 @@ PYLINT_CWE_MAPPING = {
     
     # Path traversal potential
     'W1113': ['CWE-22'],  # keyword-arg-before-vararg (path manipulation)
+    
+    # Expanded mappings to reduce UNKNOWNs
+    'E0001': ['CWE-20'],   # syntax-error (input validation)
+    'E1136': ['CWE-843'],  # unsubscriptable-object (type confusion)
+    'E1120': ['CWE-20'],   # no-value-for-parameter
+    'E1121': ['CWE-20'],   # too-many-function-args
+    'E1133': ['CWE-664'],  # not-an-iterable (improper resource use)
+    'E0102': ['CWE-710'],  # function-redefined
+    'W0101': ['CWE-691'],  # unreachable (control flow)
+    'W0622': ['CWE-732'],  # redefined-builtin (privilege issue)
+    'W0613': ['CWE-563'],  # unused-argument
+    'R1705': ['CWE-691'],  # no-else-return
 }
 
 
@@ -371,7 +383,11 @@ def aggregate_pylint(repo_name: str, data: Dict) -> List[Dict]:
         cwes = PYLINT_CWE_MAPPING.get(msg_id, PYLINT_CWE_MAPPING.get(symbol, ["CWE-UNKNOWN"]))
         
         for cwe in cwes:
-            counts[cwe] += 1
+            if cwe != "CWE-UNKNOWN":
+                counts[cwe] += 1
+                
+        # for cwe in cwes:       
+        #     counts[cwe] += 1
     
     return [{
         "Project_name": repo_name,
