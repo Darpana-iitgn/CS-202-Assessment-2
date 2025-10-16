@@ -1,0 +1,469 @@
+digraph CFG {
+node [shape=box, style=filled, color=lightgray];
+Start [shape=oval, color=lightblue, label="Start"];
+End [shape=oval, color=lightblue, label="End"];
+B0 [label="B0:
+#include \<stdio.h\>
+#define MAX 100
+void bubbleSort(int arr[], int n, int ascending);
+void insertionSort(int arr[], int n, int ascending);
+void selectionSort(int arr[], int n, int ascending);
+void mergeSort(int arr[], int l, int r, int ascending);
+void merge(int arr[], int l, int m, int r, int ascending);
+int binarySearch(int arr[], int n, int target);
+int linearSearch(int arr[], int n, int target);
+void display(int arr[], int n);
+void reverseArray(int arr[], int n);
+int findMin(int arr[], int n);
+int findMax(int arr[], int n);
+int isSorted(int arr[], int n, int ascending);
+void swap(int *a, int *b);"];
+B1 [label="B1:
+void bubbleSort(int arr[], int n, int ascending) \{"];
+B2 [label="B2:
+for (int i = 0; i \< n - 1; i++) \{"];
+B3 [label="B3:
+for (int j = 0; j \< n - i - 1; j++) \{"];
+B4 [label="B4:
+int condition = ascending ? (arr[j] \> arr[j + 1]) : (arr[j] \< arr[j + 1]);"];
+B5 [label="B5:
+if (condition) \{"];
+B6 [label="B6:
+swap(&arr[j], &arr[j + 1]);"];
+B7 [label="B7:
+void insertionSort(int arr[], int n, int ascending) \{"];
+B8 [label="B8:
+for (int i = 1; i \< n; i++) \{"];
+B9 [label="B9:
+int key = arr[i];
+int j = i - 1;"];
+B10 [label="B10:
+while (j \>= 0 && (ascending ? arr[j] \> key : arr[j] \< key)) \{"];
+B11 [label="B11:
+arr[j + 1] = arr[j];
+j--;
+arr[j + 1] = key;"];
+B12 [label="B12:
+void selectionSort(int arr[], int n, int ascending) \{"];
+B13 [label="B13:
+for (int i = 0; i \< n - 1; i++) \{"];
+B14 [label="B14:
+int idx = i;"];
+B15 [label="B15:
+for (int j = i + 1; j \< n; j++) \{"];
+B16 [label="B16:
+if (ascending ? arr[j] \< arr[idx] : arr[j] \> arr[idx]) \{"];
+B17 [label="B17:
+idx = j;"];
+B18 [label="B18:
+if (idx != i) swap(&arr[i], &arr[idx]);"];
+B19 [label="B19:
+void merge(int arr[], int l, int m, int r, int ascending) \{"];
+B20 [label="B20:
+int n1 = m - l + 1, n2 = r - m;
+int left[MAX], right[MAX];"];
+B21 [label="B21:
+for (int i = 0; i \< n1; i++) left[i] = arr[l + i];"];
+B22 [label="B22:
+for (int j = 0; j \< n2; j++) right[j] = arr[m + 1 + j];"];
+B23 [label="B23:
+int i = 0, j = 0, k = l;"];
+B24 [label="B24:
+while (i \< n1 && j \< n2) \{"];
+B25 [label="B25:
+if (ascending ? left[i] \<= right[j] : left[i] \>= right[j])"];
+B26 [label="B26:
+arr[k++] = left[i++];"];
+B27 [label="B27:
+else"];
+B28 [label="B28:
+arr[k++] = right[j++];"];
+B29 [label="B29:
+while (i \< n1) arr[k++] = left[i++];"];
+B30 [label="B30:
+while (j \< n2) arr[k++] = right[j++];"];
+B31 [label="B31:
+void mergeSort(int arr[], int l, int r, int ascending) \{"];
+B32 [label="B32:
+if (l \< r) \{"];
+B33 [label="B33:
+int m = (l + r) / 2;
+mergeSort(arr, l, m, ascending);
+mergeSort(arr, m + 1, r, ascending);
+merge(arr, l, m, r, ascending);"];
+B34 [label="B34:
+int binarySearch(int arr[], int n, int target) \{"];
+B35 [label="B35:
+int low = 0, high = n - 1;"];
+B36 [label="B36:
+while (low \<= high) \{"];
+B37 [label="B37:
+int mid = (low + high) / 2;"];
+B38 [label="B38:
+if (arr[mid] == target) return mid;"];
+B39 [label="B39:
+else if (arr[mid] \< target) low = mid + 1;"];
+B40 [label="B40:
+else high = mid - 1;"];
+B41 [label="B41:
+return -1;"];
+B42 [label="B42:
+int linearSearch(int arr[], int n, int target) \{"];
+B43 [label="B43:
+for (int i = 0; i \< n; i++) \{"];
+B44 [label="B44:
+if (arr[i] == target) return i;"];
+B45 [label="B45:
+return -1;"];
+B46 [label="B46:
+void reverseArray(int arr[], int n) \{"];
+B47 [label="B47:
+for (int i = 0; i \< n / 2; i++) \{"];
+B48 [label="B48:
+swap(&arr[i], &arr[n - i - 1]);"];
+B49 [label="B49:
+int findMin(int arr[], int n) \{"];
+B50 [label="B50:
+int min = arr[0];"];
+B51 [label="B51:
+for (int i = 1; i \< n; i++) \{"];
+B52 [label="B52:
+if (arr[i] \< min) min = arr[i];"];
+B53 [label="B53:
+return min;"];
+B54 [label="B54:
+int findMax(int arr[], int n) \{"];
+B55 [label="B55:
+int max = arr[0];"];
+B56 [label="B56:
+for (int i = 1; i \< n; i++) \{"];
+B57 [label="B57:
+if (arr[i] \> max) max = arr[i];"];
+B58 [label="B58:
+return max;"];
+B59 [label="B59:
+int isSorted(int arr[], int n, int ascending) \{"];
+B60 [label="B60:
+for (int i = 0; i \< n - 1; i++) \{"];
+B61 [label="B61:
+if (ascending && arr[i] \> arr[i + 1]) return 0;"];
+B62 [label="B62:
+if (!ascending && arr[i] \< arr[i + 1]) return 0;"];
+B63 [label="B63:
+return 1;"];
+B64 [label="B64:
+void swap(int *a, int *b) \{"];
+B65 [label="B65:
+int temp = *a;
+*a = *b;
+*b = temp;"];
+B66 [label="B66:
+void display(int arr[], int n) \{"];
+B67 [label="B67:
+for (int i = 0; i \< n; i++)"];
+B68 [label="B68:
+printf(\"%d \", arr[i]);
+printf(\"\\n\");"];
+B69 [label="B69:
+int main() \{"];
+B70 [label="B70:
+int arr[MAX], n, choice, target, ascending = 1;
+printf(\"Enter number of elements (\<=100): \");
+scanf(\"%d\", &n);"];
+B71 [label="B71:
+if (n \<= 0 || n \> MAX) \{"];
+B72 [label="B72:
+printf(\"Invalid size.\\n\");
+return 0;"];
+B73 [label="B73:
+printf(\"Enter %d elements:\\n\", n);"];
+B74 [label="B74:
+for (int i = 0; i \< n; i++) scanf(\"%d\", &arr[i]);"];
+B75 [label="B75:
+while (1) \{"];
+B76 [label="B76:
+printf(\"\\n=== MENU ===\\n\");
+printf(\"1. Bubble Sort\\n\");
+printf(\"2. Insertion Sort\\n\");
+printf(\"3. Selection Sort\\n\");
+printf(\"4. Merge Sort\\n\");
+printf(\"5. Binary Search\\n\");
+printf(\"6. Linear Search\\n\");
+printf(\"7. Find Min & Max\\n\");
+printf(\"8. Check whether Sorted\\n\");
+printf(\"9. Reverse Array\\n\");
+printf(\"10. Display\\n\");
+printf(\"11. Exit\\n\");
+printf(\"Enter your choice: \");
+scanf(\"%d\", &choice);"];
+B77 [label="B77:
+if (choice \>= 1 && choice \<= 4) \{"];
+B78 [label="B78:
+printf(\"Sort order (1=Ascending, 0=Descending): \");
+scanf(\"%d\", &ascending);"];
+B79 [label="B79:
+switch (choice) \{"];
+B80 [label="B80:
+case 1:
+bubbleSort(arr, n, ascending);
+printf(\"Array sorted using Bubble Sort.\\n\");
+break;"];
+B81 [label="B81:
+case 2:
+insertionSort(arr, n, ascending);
+printf(\"Array sorted using Insertion Sort.\\n\");
+break;"];
+B82 [label="B82:
+case 3:
+selectionSort(arr, n, ascending);
+printf(\"Array sorted using Selection Sort.\\n\");
+break;"];
+B83 [label="B83:
+case 4:
+mergeSort(arr, 0, n - 1, ascending);
+printf(\"Array sorted using Merge Sort.\\n\");
+break;"];
+B84 [label="B84:
+case 5:
+printf(\"Enter element to search: \");
+scanf(\"%d\", &target);"];
+B85 [label="B85:
+if (!isSorted(arr, n, 1)) \{"];
+B86 [label="B86:
+printf(\"Array not sorted ascending! Sorting first...\\n\");
+bubbleSort(arr, n, 1);
+int idx1 = binarySearch(arr, n, target);"];
+B87 [label="B87:
+if (idx1 != -1) printf(\"Element found at index %d\\n\", idx1);"];
+B88 [label="B88:
+else printf(\"Element not found.\\n\");"];
+B89 [label="B89:
+break;"];
+B90 [label="B90:
+case 6:
+printf(\"Enter element to search: \");
+scanf(\"%d\", &target);
+int idx2 = linearSearch(arr, n, target);"];
+B91 [label="B91:
+if (idx2 != -1) printf(\"Element found at index %d\\n\", idx2);"];
+B92 [label="B92:
+else printf(\"Element not found.\\n\");"];
+B93 [label="B93:
+break;"];
+B94 [label="B94:
+case 7:
+printf(\"Min = %d, Max = %d\\n\", findMin(arr, n), findMax(arr, n));
+break;"];
+B95 [label="B95:
+case 8:"];
+B96 [label="B96:
+if (isSorted(arr, n, 1))"];
+B97 [label="B97:
+printf(\"Array is sorted in ascending order.\\n\");"];
+B98 [label="B98:
+else if (isSorted(arr, n, 0))"];
+B99 [label="B99:
+printf(\"Array is sorted in descending order.\\n\");"];
+B100 [label="B100:
+else"];
+B101 [label="B101:
+printf(\"Array is not sorted.\\n\");
+break;"];
+B102 [label="B102:
+case 9:
+reverseArray(arr, n);
+printf(\"Array reversed.\\n\");
+break;"];
+B103 [label="B103:
+case 10:
+display(arr, n);
+break;"];
+B104 [label="B104:
+case 11:
+printf(\"Exiting program.\\n\");
+return 0;"];
+B105 [label="B105:
+default:
+printf(\"Invalid choice.\\n\");
+return 0;"];
+Start -> B0;
+B16 -> B17 [label="true"];
+B59 -> B60;
+B87 -> B88 [label="true"];
+B50 -> B51;
+B30 -> B32 [label="false (exit)"];
+B44 -> B43 [label="back"];
+B73 -> B74;
+B10 -> B12 [label="false (exit)"];
+B75 -> B77 [label="false (exit)"];
+B75 -> B74 [label="back"];
+B39 -> B41 [label="false"];
+B2 -> B4 [label="false (exit)"];
+B97 -> B98;
+B6 -> B7;
+B79 -> B80;
+B39 -> B40 [label="true"];
+B37 -> B36 [label="back"];
+B103 -> B104;
+B46 -> B47;
+B61 -> B60 [label="back"];
+B76 -> B77;
+B36 -> B38 [label="false (exit)"];
+B28 -> B29;
+B5 -> B7 [label="false"];
+B91 -> B92 [label="true"];
+B62 -> B64 [label="false"];
+B61 -> B63 [label="false"];
+B89 -> B90;
+B11 -> B12;
+B76 -> B75 [label="back"];
+B54 -> B55;
+B37 -> B38;
+B74 -> B76 [label="false (exit)"];
+B102 -> B103;
+B99 -> B100;
+B9 -> B8 [label="back"];
+B42 -> B43;
+B34 -> B35;
+B87 -> B89 [label="false"];
+B8 -> B9 [label="true"];
+B22 -> B24 [label="false (exit)"];
+B17 -> B18;
+B47 -> B49 [label="false (exit)"];
+B8 -> B10 [label="false (exit)"];
+B49 -> B50;
+B25 -> B24 [label="back"];
+B24 -> B25 [label="true"];
+B30 -> B29 [label="back"];
+B32 -> B34 [label="false"];
+B25 -> B27 [label="false"];
+B44 -> B46 [label="false"];
+B52 -> B51 [label="back"];
+B71 -> B72 [label="true"];
+B67 -> B68 [label="true"];
+B4 -> B3 [label="back"];
+B65 -> B66;
+B10 -> B11 [label="true"];
+B16 -> B18 [label="false"];
+B95 -> B96;
+B5 -> B6 [label="true"];
+B21 -> B22 [label="true"];
+B71 -> B73 [label="false"];
+B70 -> B71;
+B4 -> B5;
+B0 -> B1;
+B75 -> B76 [label="true"];
+B13 -> B14 [label="true"];
+B98 -> B100 [label="false"];
+B38 -> B39 [label="true"];
+B43 -> B45 [label="false (exit)"];
+B57 -> B56 [label="back"];
+B81 -> B82;
+B83 -> B84;
+B22 -> B21 [label="back"];
+B88 -> B89;
+B92 -> B93;
+B60 -> B62 [label="false (exit)"];
+B77 -> B79 [label="false"];
+B57 -> B58 [label="true"];
+B15 -> B17 [label="false (exit)"];
+B14 -> B15;
+B21 -> B23 [label="false (exit)"];
+B2 -> B3 [label="true"];
+B35 -> B36;
+B9 -> B10;
+B74 -> B75 [label="true"];
+B52 -> B53 [label="true"];
+B62 -> B63 [label="true"];
+B94 -> B95;
+B22 -> B23 [label="true"];
+B3 -> B2 [label="back"];
+B20 -> B21;
+B32 -> B33 [label="true"];
+B19 -> B20;
+B100 -> B101;
+B69 -> B70;
+B16 -> B15 [label="back"];
+B56 -> B57 [label="true"];
+B44 -> B45 [label="true"];
+B33 -> B34;
+B24 -> B26 [label="false (exit)"];
+B29 -> B31 [label="false (exit)"];
+B64 -> B65;
+B31 -> B30 [label="back"];
+B23 -> B24;
+B60 -> B61 [label="true"];
+B48 -> B47 [label="back"];
+B67 -> B69 [label="false (exit)"];
+B80 -> B81;
+B98 -> B99 [label="true"];
+B48 -> B49;
+B68 -> B69;
+B96 -> B98 [label="false"];
+B52 -> B54 [label="false"];
+B57 -> B59 [label="false"];
+B12 -> B13;
+B82 -> B83;
+B96 -> B97 [label="true"];
+B3 -> B4 [label="true"];
+B93 -> B94;
+B91 -> B93 [label="false"];
+B14 -> B13 [label="back"];
+B7 -> B8;
+B90 -> B91;
+B43 -> B44 [label="true"];
+B51 -> B52 [label="true"];
+B55 -> B56;
+B18 -> B20 [label="false"];
+B47 -> B48 [label="true"];
+B66 -> B67;
+B86 -> B87;
+B13 -> B15 [label="false (exit)"];
+B78 -> B79;
+B25 -> B26 [label="true"];
+B3 -> B5 [label="false (exit)"];
+B68 -> B67 [label="back"];
+B36 -> B37 [label="true"];
+B31 -> B32;
+B85 -> B87 [label="false"];
+B29 -> B30 [label="true"];
+B1 -> B2;
+B15 -> B16 [label="true"];
+B40 -> B41;
+B101 -> B102;
+B85 -> B86 [label="true"];
+B77 -> B78 [label="true"];
+B26 -> B27;
+B27 -> B28;
+B18 -> B19 [label="true"];
+B11 -> B10 [label="back"];
+B84 -> B85;
+B56 -> B58 [label="false (exit)"];
+B30 -> B31 [label="true"];
+B38 -> B40 [label="false"];
+B51 -> B53 [label="false (exit)"];
+B23 -> B22 [label="back"];
+B61 -> B62 [label="true"];
+B38 -> End;
+B41 -> End;
+B44 -> End;
+B45 -> End;
+B53 -> End;
+B58 -> End;
+B61 -> End;
+B62 -> End;
+B63 -> End;
+B72 -> End;
+B80 -> End;
+B81 -> End;
+B82 -> End;
+B83 -> End;
+B89 -> End;
+B93 -> End;
+B94 -> End;
+B101 -> End;
+B102 -> End;
+B103 -> End;
+B104 -> End;
+B105 -> End;
+}

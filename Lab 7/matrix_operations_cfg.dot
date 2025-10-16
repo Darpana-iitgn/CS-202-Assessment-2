@@ -1,0 +1,450 @@
+digraph CFG {
+node [shape=box, style=filled, color=lightgray];
+Start [shape=oval, color=lightblue, label="Start"];
+End [shape=oval, color=lightblue, label="End"];
+B0 [label="B0:
+#include \<stdio.h\>
+#define MAX 10"];
+B1 [label="B1:
+void inputMatrix(int mat[MAX][MAX], int r, int c) \{"];
+B2 [label="B2:
+for (int i = 0; i \< r; i++) \{"];
+B3 [label="B3:
+for (int j = 0; j \< c; j++) \{"];
+B4 [label="B4:
+printf(\"Enter element [%d][%d]: \", i, j);
+scanf(\"%d\", &mat[i][j]);"];
+B5 [label="B5:
+void printMatrix(int mat[MAX][MAX], int r, int c) \{"];
+B6 [label="B6:
+printf(\"\\n\");"];
+B7 [label="B7:
+for (int i = 0; i \< r; i++) \{"];
+B8 [label="B8:
+for (int j = 0; j \< c; j++) \{"];
+B9 [label="B9:
+printf(\"%6d\", mat[i][j]);
+printf(\"\\n\");
+printf(\"\\n\");"];
+B10 [label="B10:
+void addMatrix(int A[MAX][MAX], int B[MAX][MAX], int C[MAX][MAX], int r, int c) \{"];
+B11 [label="B11:
+for (int i = 0; i \< r; i++) \{"];
+B12 [label="B12:
+for (int j = 0; j \< c; j++) \{"];
+B13 [label="B13:
+C[i][j] = A[i][j] + B[i][j];"];
+B14 [label="B14:
+void subMatrix(int A[MAX][MAX], int B[MAX][MAX], int C[MAX][MAX], int r, int c) \{"];
+B15 [label="B15:
+for (int i = 0; i \< r; i++) \{"];
+B16 [label="B16:
+for (int j = 0; j \< c; j++) \{"];
+B17 [label="B17:
+C[i][j] = A[i][j] - B[i][j];"];
+B18 [label="B18:
+void mulMatrix(int A[MAX][MAX], int B[MAX][MAX], int C[MAX][MAX], int r1, int c1, int c2) \{"];
+B19 [label="B19:
+for (int i = 0; i \< r1; i++) \{"];
+B20 [label="B20:
+for (int j = 0; j \< c2; j++) \{"];
+B21 [label="B21:
+C[i][j] = 0;"];
+B22 [label="B22:
+for (int k = 0; k \< c1; k++) \{"];
+B23 [label="B23:
+C[i][j] += A[i][k] * B[k][j];"];
+B24 [label="B24:
+void transpose(int A[MAX][MAX], int T[MAX][MAX], int r, int c) \{"];
+B25 [label="B25:
+for (int i = 0; i \< r; i++) \{"];
+B26 [label="B26:
+for (int j = 0; j \< c; j++) \{"];
+B27 [label="B27:
+T[j][i] = A[i][j];"];
+B28 [label="B28:
+int isSymmetric(int A[MAX][MAX], int r, int c) \{"];
+B29 [label="B29:
+if (r != c) return 0;"];
+B30 [label="B30:
+for (int i = 0; i \< r; i++) \{"];
+B31 [label="B31:
+for (int j = 0; j \< c; j++) \{"];
+B32 [label="B32:
+if (A[i][j] != A[j][i])"];
+B33 [label="B33:
+return 0;"];
+B34 [label="B34:
+return 1;"];
+B35 [label="B35:
+float determinant(int A[MAX][MAX], int n) \{"];
+B36 [label="B36:
+float det = 0;"];
+B37 [label="B37:
+if (n == 2) \{"];
+B38 [label="B38:
+det = (A[0][0] * A[1][1]) - (A[0][1] * A[1][0]);"];
+B39 [label="B39:
+\} else if (n == 3) \{"];
+B40 [label="B40:
+det = A[0][0]*(A[1][1]*A[2][2] - A[1][2]*A[2][1])
+- A[0][1]*(A[1][0]*A[2][2] - A[1][2]*A[2][0])
++ A[0][2]*(A[1][0]*A[2][1] - A[1][1]*A[2][0]);"];
+B41 [label="B41:
+\} else \{"];
+B42 [label="B42:
+printf(\"Determinant calculation supported only for 2x2 or 3x3.\\n\");"];
+B43 [label="B43:
+return det;"];
+B44 [label="B44:
+void inverse2x2(int A[MAX][MAX]) \{"];
+B45 [label="B45:
+float det = determinant(A, 2);"];
+B46 [label="B46:
+if (det == 0) \{"];
+B47 [label="B47:
+printf(\"Matrix not invertible (determinant = 0)\\n\");
+return;"];
+B48 [label="B48:
+float inv[2][2];
+inv[0][0] = A[1][1] / det;
+inv[0][1] = -A[0][1] / det;
+inv[1][0] = -A[1][0] / det;
+inv[1][1] = A[0][0] / det;
+printf(\"Inverse of the 2x2 matrix:\\n\");"];
+B49 [label="B49:
+for (int i = 0; i \< 2; i++) \{"];
+B50 [label="B50:
+for (int j = 0; j \< 2; j++) \{"];
+B51 [label="B51:
+printf(\"%8.2f\", inv[i][j]);
+printf(\"\\n\");"];
+B52 [label="B52:
+void inverse3x3(int A[MAX][MAX]) \{"];
+B53 [label="B53:
+float det = determinant(A, 3);"];
+B54 [label="B54:
+if (det == 0) \{"];
+B55 [label="B55:
+printf(\"Matrix not invertible (determinant = 0)\\n\");
+return;"];
+B56 [label="B56:
+float inv[3][3];
+inv[0][0] = (A[1][1]*A[2][2] - A[1][2]*A[2][1]) / det;
+inv[0][1] = (A[0][2]*A[2][1] - A[0][1]*A[2][2]) / det;
+inv[0][2] = (A[0][1]*A[1][2] - A[0][2]*A[1][1]) / det;
+inv[1][0] = (A[1][2]*A[2][0] - A[1][0]*A[2][2]) / det;
+inv[1][1] = (A[0][0]*A[2][2] - A[0][2]*A[2][0]) / det;
+inv[1][2] = (A[0][2]*A[1][0] - A[0][0]*A[1][2]) / det;
+inv[2][0] = (A[1][0]*A[2][1] - A[1][1]*A[2][0]) / det;
+inv[2][1] = (A[0][1]*A[2][0] - A[0][0]*A[2][1]) / det;
+inv[2][2] = (A[0][0]*A[1][1] - A[0][1]*A[1][0]) / det;
+printf(\"Inverse of the 3x3 matrix:\\n\");"];
+B57 [label="B57:
+for (int i = 0; i \< 3; i++) \{"];
+B58 [label="B58:
+for (int j = 0; j \< 3; j++) \{"];
+B59 [label="B59:
+printf(\"%8.2f\", inv[i][j]);
+printf(\"\\n\");"];
+B60 [label="B60:
+int main() \{"];
+B61 [label="B61:
+int A[MAX][MAX], B[MAX][MAX], C[MAX][MAX], T[MAX][MAX];
+int r1, c1, r2, c2, choice;
+float det = 0.0;
+printf(\"Enter rows and columns of Matrix A: \");
+scanf(\"%d %d\", &r1, &c1);
+printf(\"Enter rows and columns of Matrix B: \");
+scanf(\"%d %d\", &r2, &c2);"];
+B62 [label="B62:
+if (r1 \> MAX || c1 \> MAX || r2 \> MAX || c2 \> MAX) \{"];
+B63 [label="B63:
+printf(\"Matrix size too large!\\n\");
+return 0;"];
+B64 [label="B64:
+printf(\"Enter elements for Matrix A:\\n\");"];
+B65 [label="B65:
+inputMatrix(A, r1, c1);"];
+B66 [label="B66:
+printf(\"Enter elements for Matrix B:\\n\");"];
+B67 [label="B67:
+inputMatrix(B, r2, c2);"];
+B68 [label="B68:
+while (1) \{"];
+B69 [label="B69:
+printf(\"\\n==== MATRIX MENU ====\\n\");
+printf(\"1. Add\\n2. Subtract\\n3. Multiply\\n4. Transpose\\n5. Symmetric Check\\n\");
+printf(\"6. Determinant\\n7. Inverse (2x2 or 3x3)\\n8. Exit\\nChoice: \");
+scanf(\"%d\", &choice);"];
+B70 [label="B70:
+if (choice == 1) \{"];
+B71 [label="B71:
+if (r1 == r2 && c1 == c2) \{"];
+B72 [label="B72:
+addMatrix(A, B, C, r1, c1);
+printf(\"A + B = \\n\");
+printMatrix(C, r1, c1);"];
+B73 [label="B73:
+\} else \{"];
+B74 [label="B74:
+printf(\"Addition not possible (dimension mismatch)\\n\");"];
+B75 [label="B75:
+\} else if (choice == 2) \{"];
+B76 [label="B76:
+if (r1 == r2 && c1 == c2) \{"];
+B77 [label="B77:
+subMatrix(A, B, C, r1, c1);
+printf(\"A - B = \\n\");
+printMatrix(C, r1, c1);"];
+B78 [label="B78:
+\} else \{"];
+B79 [label="B79:
+printf(\"Subtraction not possible.\\n\");"];
+B80 [label="B80:
+\} else if (choice == 3) \{"];
+B81 [label="B81:
+if (c1 == r2) \{"];
+B82 [label="B82:
+mulMatrix(A, B, C, r1, c1, c2);
+printf(\"A x B = \\n\");
+printMatrix(C, r1, c2);"];
+B83 [label="B83:
+\} else \{"];
+B84 [label="B84:
+printf(\"Multiplication not possible.\\n\");"];
+B85 [label="B85:
+\} else if (choice == 4) \{"];
+B86 [label="B86:
+transpose(A, T, r1, c1);
+printf(\"Transpose of A:\\n\");
+printMatrix(T, c1, r1);"];
+B87 [label="B87:
+\} else if (choice == 5) \{"];
+B88 [label="B88:
+if (isSymmetric(A, r1, c1))"];
+B89 [label="B89:
+printf(\"Matrix A is symmetric.\\n\");"];
+B90 [label="B90:
+else"];
+B91 [label="B91:
+printf(\"Matrix A is not symmetric.\\n\");"];
+B92 [label="B92:
+\} else if (choice == 6) \{"];
+B93 [label="B93:
+if (r1 == c1 && (r1 == 2 || r1 == 3)) \{"];
+B94 [label="B94:
+det = determinant(A, r1);
+printf(\"Determinant of A = %.2f\\n\", det);"];
+B95 [label="B95:
+\} else \{"];
+B96 [label="B96:
+printf(\"Determinant supported only for 2x2 or 3x3.\\n\");"];
+B97 [label="B97:
+\} else if (choice == 7) \{"];
+B98 [label="B98:
+if (r1 == c1 && r1 == 2)"];
+B99 [label="B99:
+inverse2x2(A);"];
+B100 [label="B100:
+else if (r1 == c1 && r1 == 3)"];
+B101 [label="B101:
+inverse3x3(A);"];
+B102 [label="B102:
+else"];
+B103 [label="B103:
+printf(\"Inverse supported only for 2x2 or 3x3.\\n\");"];
+B104 [label="B104:
+\} else if (choice == 8) \{"];
+B105 [label="B105:
+printf(\"Exiting...\\n\");
+break;"];
+B106 [label="B106:
+\} else \{"];
+B107 [label="B107:
+printf(\"Invalid choice. Try again.\\n\");
+return 0;"];
+Start -> B0;
+B40 -> B41;
+B51 -> B50 [label="back"];
+B87 -> B89 [label="false"];
+B57 -> B59 [label="false (exit)"];
+B84 -> B85;
+B103 -> B104 [label="true"];
+B12 -> B13 [label="true"];
+B92 -> B93 [label="true"];
+B104 -> B105 [label="true"];
+B12 -> B11 [label="back"];
+B76 -> B77 [label="true"];
+B3 -> B2 [label="back"];
+B102 -> B103;
+B22 -> B24 [label="false (exit)"];
+B67 -> B66 [label="back"];
+B71 -> B72 [label="true"];
+B42 -> B43 [label="true"];
+B50 -> B49 [label="back"];
+B73 -> B74;
+B11 -> B12 [label="true"];
+B12 -> B14 [label="false (exit)"];
+B31 -> B32 [label="true"];
+B88 -> B89 [label="true"];
+B92 -> B94 [label="false"];
+B14 -> B15;
+B37 -> B39 [label="false"];
+B68 -> B70 [label="false (exit)"];
+B97 -> B98 [label="true"];
+B23 -> B22 [label="back"];
+B98 -> B100 [label="false"];
+B58 -> B60 [label="false (exit)"];
+B35 -> B36;
+B10 -> B11;
+B69 -> B68 [label="back"];
+B106 -> B107;
+B16 -> B18 [label="false (exit)"];
+B105 -> B106;
+B70 -> B72 [label="false"];
+B19 -> B21 [label="false (exit)"];
+B97 -> B96 [label="back"];
+B85 -> B86 [label="true"];
+B41 -> B42;
+B4 -> B3 [label="back"];
+B2 -> B4 [label="false (exit)"];
+B4 -> B5;
+B82 -> B83;
+B22 -> B23 [label="true"];
+B96 -> B98 [label="false (exit)"];
+B25 -> B26 [label="true"];
+B69 -> B70;
+B93 -> B95 [label="false"];
+B59 -> B58 [label="back"];
+B97 -> B99 [label="false"];
+B98 -> B99 [label="true"];
+B8 -> B7 [label="back"];
+B58 -> B57 [label="back"];
+B83 -> B84;
+B65 -> B64 [label="back"];
+B67 -> B68;
+B75 -> B76 [label="true"];
+B64 -> B65 [label="true"];
+B23 -> B24;
+B77 -> B78;
+B15 -> B17 [label="false (exit)"];
+B1 -> B2;
+B13 -> B14;
+B43 -> B42 [label="back"];
+B100 -> B102 [label="false"];
+B17 -> B18;
+B31 -> B30 [label="back"];
+B74 -> B75;
+B101 -> B102;
+B46 -> B47 [label="true"];
+B48 -> B49;
+B13 -> B12 [label="back"];
+B3 -> B5 [label="false (exit)"];
+B27 -> B26 [label="back"];
+B51 -> B52;
+B18 -> B19;
+B62 -> B64 [label="false"];
+B104 -> B103 [label="back"];
+B49 -> B50 [label="true"];
+B7 -> B9 [label="false (exit)"];
+B25 -> B27 [label="false (exit)"];
+B75 -> B77 [label="false"];
+B81 -> B82 [label="true"];
+B16 -> B17 [label="true"];
+B61 -> B62;
+B65 -> B66;
+B56 -> B57;
+B9 -> B8 [label="back"];
+B36 -> B37;
+B72 -> B73;
+B71 -> B73 [label="false"];
+B27 -> B28;
+B26 -> B27 [label="true"];
+B24 -> B25;
+B15 -> B16 [label="true"];
+B31 -> B33 [label="false (exit)"];
+B54 -> B55 [label="true"];
+B39 -> B40 [label="true"];
+B20 -> B21 [label="true"];
+B93 -> B94 [label="true"];
+B26 -> B25 [label="back"];
+B91 -> B92;
+B20 -> B22 [label="false (exit)"];
+B89 -> B90;
+B60 -> B61;
+B11 -> B13 [label="false (exit)"];
+B45 -> B46;
+B87 -> B88 [label="true"];
+B100 -> B101 [label="true"];
+B70 -> B71 [label="true"];
+B37 -> B38 [label="true"];
+B50 -> B52 [label="false (exit)"];
+B29 -> B30 [label="true"];
+B32 -> B34 [label="false"];
+B30 -> B32 [label="false (exit)"];
+B19 -> B20 [label="true"];
+B44 -> B45;
+B21 -> B22;
+B7 -> B8 [label="true"];
+B66 -> B68 [label="false (exit)"];
+B8 -> B10 [label="false (exit)"];
+B78 -> B79;
+B88 -> B90 [label="false"];
+B95 -> B96;
+B96 -> B97 [label="true"];
+B8 -> B9 [label="true"];
+B32 -> B31 [label="back"];
+B42 -> B44 [label="false (exit)"];
+B90 -> B91;
+B9 -> B10;
+B94 -> B95;
+B79 -> B80;
+B53 -> B54;
+B66 -> B67 [label="true"];
+B85 -> B87 [label="false"];
+B80 -> B82 [label="false"];
+B54 -> B56 [label="false"];
+B3 -> B4 [label="true"];
+B80 -> B81 [label="true"];
+B76 -> B78 [label="false"];
+B21 -> B20 [label="back"];
+B29 -> B31 [label="false"];
+B26 -> B28 [label="false (exit)"];
+B99 -> B100;
+B81 -> B83 [label="false"];
+B16 -> B15 [label="back"];
+B20 -> B19 [label="back"];
+B0 -> B1;
+B32 -> B33 [label="true"];
+B2 -> B3 [label="true"];
+B38 -> B39;
+B49 -> B51 [label="false (exit)"];
+B50 -> B51 [label="true"];
+B30 -> B31 [label="true"];
+B17 -> B16 [label="back"];
+B57 -> B58 [label="true"];
+B28 -> B29;
+B5 -> B6;
+B104 -> B106 [label="false"];
+B39 -> B41 [label="false"];
+B62 -> B63 [label="true"];
+B58 -> B59 [label="true"];
+B59 -> B60;
+B64 -> B66 [label="false (exit)"];
+B103 -> B105 [label="false (exit)"];
+B46 -> B48 [label="false"];
+B52 -> B53;
+B68 -> B69 [label="true"];
+B6 -> B7;
+B86 -> B87;
+B29 -> End;
+B33 -> End;
+B34 -> End;
+B43 -> End;
+B47 -> End;
+B55 -> End;
+B63 -> End;
+B105 -> End;
+B107 -> End;
+}
