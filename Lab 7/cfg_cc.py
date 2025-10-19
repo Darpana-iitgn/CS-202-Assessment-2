@@ -179,10 +179,7 @@ def main():
 
 
 def analyze_cfg(filename):
-    """
-    A reusable function to generate basic blocks, edges, and compute CC.
-    Returns blocks, edges, and cyclomatic complexity.
-    """
+
     with open(filename, "r", encoding="utf-8") as f:
         code = f.read()
 

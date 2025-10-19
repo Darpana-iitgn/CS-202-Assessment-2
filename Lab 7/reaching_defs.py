@@ -90,13 +90,13 @@ def reaching_definitions(blocks, edges, definitions, var_defs):
 def print_rd_results(results, filename, definitions):
     base = os.path.splitext(os.path.basename(filename))[0]
 
-    # ✅ Save definitions to a separate .txt file
+    # Save definitions to a separate .txt file
     defs_filename = f"{base}_definitions.txt"
     with open(defs_filename, "w") as f:
         f.write(f"=== Definitions in {filename} ===\n\n")
         for d, info in definitions.items():
             f.write(f"{d}: Variable = {info['var']}, Block = {info['block']}, Line = {info['line']}\n")
-    print(f"✅ Definitions saved to {defs_filename}")
+    print(f"Definitions saved to {defs_filename}")
 
     # Save reaching definitions iterations to Excel
     xlsx_name = f"{base}_reaching_definitions.xlsx"
@@ -114,7 +114,7 @@ def print_rd_results(results, filename, definitions):
             ])
             df.to_excel(writer, sheet_name=f"Iteration_{iteration}", index=False)
 
-    print(f"✅ Reaching Definitions saved to {xlsx_name}")
+    print(f"Reaching Definitions saved to {xlsx_name}")
 
 
 def main():
