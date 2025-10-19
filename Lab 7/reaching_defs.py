@@ -4,7 +4,7 @@ import sys
 from cfg_cc import analyze_cfg, compute_predecessors
 import re
 import pandas as pd
-
+import os
 
 def find_definitions(blocks):
     definitions = {}
@@ -17,7 +17,7 @@ def find_definitions(blocks):
             if match:
                 var = match.group(1)
                 d = f"D{def_id}"
-                definitions[d] = {"line": line, "var": var, "block": label}
+                definitions[d] = {"line": line.strip(), "var": var, "block": label}
                 var_defs.setdefault(var, set()).add(d)
                 def_id += 1
 
@@ -33,7 +33,7 @@ def compute_gen_kill(blocks, definitions, var_defs):
         kill[label] = set()
         for line in block:
             for d, info in definitions.items():
-                if info["line"] == line:
+                if info["line"] == line.strip():
                     var = info["var"]
                     gen[label].add(d)
                     kill[label].update(var_defs[var] - {d})
@@ -87,43 +87,18 @@ def reaching_definitions(blocks, edges, definitions, var_defs):
     return results
 
 
-import os
-import pandas as pd
-
-def print_rd_results(results, filename):
-    # Extract base name of the C file (e.g. sorting_and_search.c → sorting_and_search)
+def print_rd_results(results, filename, definitions):
     base = os.path.splitext(os.path.basename(filename))[0]
 
-    for iteration, table in results:
-        print(f"\n=== Iteration {iteration} ({base}) ===")
-        # print("{:<10} {:<25} {:<25} {:<25} {:<25}".format(
-        #     "Block", "gen[B]", "kill[B]", "in[B]", "out[B]"))
-        print("-" * 120)
+    # ✅ Save definitions to a separate .txt file
+    defs_filename = f"{base}_definitions.txt"
+    with open(defs_filename, "w") as f:
+        f.write(f"=== Definitions in {filename} ===\n\n")
+        for d, info in definitions.items():
+            f.write(f"{d}: Variable = {info['var']}, Block = {info['block']}, Line = {info['line']}\n")
+    print(f"✅ Definitions saved to {defs_filename}")
 
-        data = []
-        for row in table:
-            gen_str = "{" + ",".join(sorted(row["gen"])) + "}" if row["gen"] else "{}"
-            kill_str = "{" + ",".join(sorted(row["kill"])) + "}" if row["kill"] else "{}"
-            in_str = "{" + ",".join(sorted(row["in"])) + "}" if row["in"] else "{}"
-            out_str = "{" + ",".join(sorted(row["out"])) + "}" if row["out"] else "{}"
-
-            # print("{:<10} {:<25} {:<25} {:<25} {:<25}".format(
-            #     row["Block"], gen_str, kill_str, in_str, out_str))
-
-            data.append({
-                "Basic Block": row["Block"],
-                "gen[B]": gen_str,
-                "kill[B]": kill_str,
-                "in[B]": in_str,
-                "out[B]": out_str
-            })
-
-        # # Save CSV for this iteration
-        # csv_name = f"{base}_iteration_{iteration}.csv"
-        # pd.DataFrame(data).to_csv(csv_name, index=False)
-        # print(f"Saved table for Iteration {iteration} → {csv_name}")
-
-    # After all iterations, save a combined Excel file (each sheet = one iteration)
+    # Save reaching definitions iterations to Excel
     xlsx_name = f"{base}_reaching_definitions.xlsx"
     with pd.ExcelWriter(xlsx_name) as writer:
         for iteration, table in results:
@@ -133,13 +108,13 @@ def print_rd_results(results, filename):
                     "gen[B]": "{" + ",".join(sorted(row["gen"])) + "}" if row["gen"] else "{}",
                     "kill[B]": "{" + ",".join(sorted(row["kill"])) + "}" if row["kill"] else "{}",
                     "in[B]": "{" + ",".join(sorted(row["in"])) + "}" if row["in"] else "{}",
-                    "o"
-                    "ut[B]": "{" + ",".join(sorted(row["out"])) + "}" if row["out"] else "{}"
+                    "out[B]": "{" + ",".join(sorted(row["out"])) + "}" if row["out"] else "{}"
                 }
                 for row in table
             ])
             df.to_excel(writer, sheet_name=f"Iteration_{iteration}", index=False)
-    print(f"All iterations saved to {xlsx_name}")
+
+    print(f"✅ Reaching Definitions saved to {xlsx_name}")
 
 
 def main():
@@ -148,8 +123,6 @@ def main():
         sys.exit(1)
 
     filename = sys.argv[1]
-
-    # Import CFG info from cfg_cc.py
     blocks, edges, N, E, CC = analyze_cfg(filename)
 
     print(f"Using CFG from {filename}")
@@ -158,11 +131,8 @@ def main():
     definitions, var_defs = find_definitions(blocks)
     results = reaching_definitions(blocks, edges, definitions, var_defs)
 
-    print_rd_results(results, filename)
+    print_rd_results(results, filename, definitions)
 
-    # print("\nDefinition Mapping:")
-    # for d, info in definitions.items():
-    #     print(f"{d}: {info['line']}")
 
 if __name__ == "__main__":
     main()

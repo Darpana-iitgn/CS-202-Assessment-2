@@ -1,0 +1,34 @@
+=== Definitions in matrix_operations.c ===
+
+D1: Variable = i, Block = B2, Line = for (int i = 0; i < r; i++) {
+D2: Variable = j, Block = B3, Line = for (int j = 0; j < c; j++) {
+D3: Variable = i, Block = B7, Line = for (int i = 0; i < r; i++) {
+D4: Variable = j, Block = B8, Line = for (int j = 0; j < c; j++) {
+D5: Variable = i, Block = B11, Line = for (int i = 0; i < r; i++) {
+D6: Variable = j, Block = B12, Line = for (int j = 0; j < c; j++) {
+D7: Variable = i, Block = B15, Line = for (int i = 0; i < r; i++) {
+D8: Variable = j, Block = B16, Line = for (int j = 0; j < c; j++) {
+D9: Variable = i, Block = B19, Line = for (int i = 0; i < r1; i++) {
+D10: Variable = j, Block = B20, Line = for (int j = 0; j < c2; j++) {
+D11: Variable = k, Block = B22, Line = for (int k = 0; k < c1; k++) {
+D12: Variable = i, Block = B25, Line = for (int i = 0; i < r; i++) {
+D13: Variable = j, Block = B26, Line = for (int j = 0; j < c; j++) {
+D14: Variable = i, Block = B30, Line = for (int i = 0; i < r; i++) {
+D15: Variable = j, Block = B31, Line = for (int j = 0; j < c; j++) {
+D16: Variable = t, Block = B36, Line = float det = 0;
+D17: Variable = t, Block = B38, Line = det = (A[0][0] * A[1][1]) - (A[0][1] * A[1][0]);
+D18: Variable = t, Block = B45, Line = float det = determinant(A, 2);
+D19: Variable = t, Block = B47, Line = printf("Matrix not invertible (determinant = 0)\n");
+D20: Variable = i, Block = B49, Line = for (int i = 0; i < 2; i++) {
+D21: Variable = j, Block = B50, Line = for (int j = 0; j < 2; j++) {
+D22: Variable = t, Block = B53, Line = float det = determinant(A, 3);
+D23: Variable = t, Block = B55, Line = printf("Matrix not invertible (determinant = 0)\n");
+D24: Variable = i, Block = B57, Line = for (int i = 0; i < 3; i++) {
+D25: Variable = j, Block = B58, Line = for (int j = 0; j < 3; j++) {
+D26: Variable = t, Block = B61, Line = float det = 0.0;
+D27: Variable = U, Block = B69, Line = printf("\n==== MATRIX MENU ====\n");
+D28: Variable = B, Block = B72, Line = printf("A + B = \n");
+D29: Variable = B, Block = B77, Line = printf("A - B = \n");
+D30: Variable = B, Block = B82, Line = printf("A x B = \n");
+D31: Variable = t, Block = B94, Line = det = determinant(A, r1);
+D32: Variable = A, Block = B94, Line = printf("Determinant of A = %.2f\n", det);

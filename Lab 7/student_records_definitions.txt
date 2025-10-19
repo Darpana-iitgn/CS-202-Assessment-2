@@ -1,0 +1,32 @@
+=== Definitions in student_records.c ===
+
+D1: Variable = m, Block = B5, Line = int sum = 0;
+D2: Variable = i, Block = B6, Line = for (int i = 0; i < SUBJECTS; i++)
+D3: Variable = i, Block = B16, Line = for (int i = 0; i < SUBJECTS; i++)
+D4: Variable = g, Block = B17, Line = s->avg = calcAverage(s->marks);
+D5: Variable = e, Block = B17, Line = s->grade = assignGrade(s->avg);
+D6: Variable = i, Block = B22, Line = for (int i = 0; i < n; i++)
+D7: Variable = i, Block = B25, Line = for (int i = 0; i < n; i++) {
+D8: Variable = x, Block = B30, Line = int idx = findStudentIndex(s, n, name);
+D9: Variable = i, Block = B34, Line = for (int i = 0; i < SUBJECTS; i++)
+D10: Variable = g, Block = B35, Line = s[idx].avg = calcAverage(s[idx].marks);
+D11: Variable = e, Block = B35, Line = s[idx].grade = assignGrade(s[idx].avg);
+D12: Variable = x, Block = B37, Line = int idx = findStudentIndex(s, *n, name);
+D13: Variable = i, Block = B40, Line = for (int i = idx; i < *n - 1; i++) {
+D14: Variable = i, Block = B43, Line = for (int i = 0; i < n - 1; i++) {
+D15: Variable = j, Block = B44, Line = for (int j = 0; j < n - i - 1; j++) {
+D16: Variable = p, Block = B46, Line = Student temp = s[j];
+D17: Variable = t, Block = B50, Line = int limit = (n >= 3) ? 3 : n;
+D18: Variable = i, Block = B51, Line = for (int i = 0; i < limit; i++)
+D19: Variable = l, Block = B54, Line = float total = 0.0;
+D20: Variable = i, Block = B55, Line = for (int i = 0; i < n; i++)
+D21: Variable = n, Block = B58, Line = int n = 0, choice;
+D22: Variable = t, Block = B58, Line = float highest = 0.0;
+D23: Variable = M, Block = B60, Line = printf("\n==== STUDENT RECORD SYSTEM ====\n");
+D24: Variable = x, Block = B83, Line = int idx = findStudentIndex(s, n, search);
+D25: Variable = g, Block = B92, Line = float avg = classAverage(s, n);
+D26: Variable = l, Block = B92, Line = int pass = 0, fail = 0;
+D27: Variable = i, Block = B93, Line = for (int i = 0; i < n; i++) {
+D28: Variable = t, Block = B97, Line = highest = 0.0;
+D29: Variable = i, Block = B98, Line = for (int i = 0; i < n; i++) {
+D30: Variable = t, Block = B100, Line = highest = s[i].avg;

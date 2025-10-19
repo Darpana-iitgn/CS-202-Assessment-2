@@ -1,0 +1,40 @@
+=== Definitions in sort.c ===
+
+D1: Variable = i, Block = B2, Line = for (int i = 0; i < n - 1; i++) {
+D2: Variable = j, Block = B3, Line = for (int j = 0; j < n - i - 1; j++) {
+D3: Variable = n, Block = B4, Line = int condition = ascending ? (arr[j] > arr[j + 1]) : (arr[j] < arr[j + 1]);
+D4: Variable = i, Block = B8, Line = for (int i = 1; i < n; i++) {
+D5: Variable = y, Block = B9, Line = int key = arr[i];
+D6: Variable = j, Block = B9, Line = int j = i - 1;
+D7: Variable = i, Block = B13, Line = for (int i = 0; i < n - 1; i++) {
+D8: Variable = x, Block = B14, Line = int idx = i;
+D9: Variable = j, Block = B15, Line = for (int j = i + 1; j < n; j++) {
+D10: Variable = x, Block = B17, Line = idx = j;
+D11: Variable = n2, Block = B20, Line = int n1 = m - l + 1, n2 = r - m;
+D12: Variable = i, Block = B21, Line = for (int i = 0; i < n1; i++) left[i] = arr[l + i];
+D13: Variable = j, Block = B22, Line = for (int j = 0; j < n2; j++) right[j] = arr[m + 1 + j];
+D14: Variable = k, Block = B23, Line = int i = 0, j = 0, k = l;
+D15: Variable = m, Block = B33, Line = int m = (l + r) / 2;
+D16: Variable = h, Block = B35, Line = int low = 0, high = n - 1;
+D17: Variable = d, Block = B37, Line = int mid = (low + high) / 2;
+D18: Variable = w, Block = B39, Line = else if (arr[mid] < target) low = mid + 1;
+D19: Variable = h, Block = B40, Line = else high = mid - 1;
+D20: Variable = i, Block = B43, Line = for (int i = 0; i < n; i++) {
+D21: Variable = i, Block = B47, Line = for (int i = 0; i < n / 2; i++) {
+D22: Variable = n, Block = B50, Line = int min = arr[0];
+D23: Variable = i, Block = B51, Line = for (int i = 1; i < n; i++) {
+D24: Variable = n, Block = B52, Line = if (arr[i] < min) min = arr[i];
+D25: Variable = x, Block = B55, Line = int max = arr[0];
+D26: Variable = i, Block = B56, Line = for (int i = 1; i < n; i++) {
+D27: Variable = x, Block = B57, Line = if (arr[i] > max) max = arr[i];
+D28: Variable = i, Block = B60, Line = for (int i = 0; i < n - 1; i++) {
+D29: Variable = p, Block = B65, Line = int temp = *a;
+D30: Variable = a, Block = B65, Line = *a = *b;
+D31: Variable = b, Block = B65, Line = *b = temp;
+D32: Variable = i, Block = B67, Line = for (int i = 0; i < n; i++)
+D33: Variable = g, Block = B70, Line = int arr[MAX], n, choice, target, ascending = 1;
+D34: Variable = i, Block = B74, Line = for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+D35: Variable = U, Block = B76, Line = printf("\n=== MENU ===\n");
+D36: Variable = x1, Block = B86, Line = int idx1 = binarySearch(arr, n, target);
+D37: Variable = x2, Block = B90, Line = int idx2 = linearSearch(arr, n, target);
+D38: Variable = x, Block = B94, Line = printf("Min = %d, Max = %d\n", findMin(arr, n), findMax(arr, n));
